@@ -30,7 +30,7 @@ def parse(path):
                 if num_cases > max_cases:
                     max_cases = num_cases
                 array = disease_index_map[disease]["values"]
-                array.extend(num_cases)
+                array.append(num_cases)
             disease_index_map[disease]["max"] = max_cases
     return json.dumps(disease_index_map,
                       sort_keys=True,
