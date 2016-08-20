@@ -1,8 +1,20 @@
-body {
-  margin: 0;
+#map-container {
+  width: 100%;
+  height: 400px;
+  background: #efefef;
 }
 
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
+#slider-container {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  background: #cecece;
+}
+
+#slider {
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
