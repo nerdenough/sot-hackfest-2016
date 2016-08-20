@@ -1,17 +1,19 @@
 var sliderConfig = {
-  change: updateMap
+  change: updateMap,
+  min: 2011,
+  max: 2016,
+  value: 2016
 };
 
-function loadData () {
-  $.getJSON('/data_json/2016_June.json', function (data) {
+function loadData (year) {
+  $.getJSON('/data_json/' + year + '_June.json', function (data) {
     console.log(data);
   });
 }
 
 function updateMap (event, ui) {
-  var value = ui.value;
-  console.log(value);
+  loadData(ui.value);
 }
 
 $('#slider').slider(sliderConfig);
-loadData();
+loadData(2016);
