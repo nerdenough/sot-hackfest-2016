@@ -4,29 +4,35 @@ import os
 import os.path
 
 ROOTDIR = "raw_data"
-OUTPUTDIR = "data_json"
+OUTPUTDIR = "public/data_json"
 
 def parse(path):
-    dhb_list = []
-    dhb_index_and_disease_case_map = {}
+    disease_index_map = {}
     with open(path, "r") as file:
+        base_index = -1
+
         for idx, line in enumerate(file):
-            if idx == 0:
-                continue # skip first line
-            if idx == 1:
-                dhb_list.extend([l for l in line.strip().split(",") if l.strip() != ""])
-                continue
-            if idx % 2 != 0:
-                continue # skip rows corresponding to cases
             columns = line.strip().split(",")
+            if base_index == -1:
+                if "Northland" in columns:
+                    base_index = idx + 1
+                continue
+
+            if (idx - base_index) % 2 != 0:
+                continue # skip 'case' rows
+
             disease = columns[0]
-            for j in xrange(2, len(columns)):
-                dhb_index = j - 1
-                if not (dhb_index in dhb_index_and_disease_case_map):
-                    dhb_index_and_disease_case_map[dhb_index] = {}
-                submap = dhb_index_and_disease_case_map[dhb_index]
-                submap[disease] = columns[j]
-    return json.dumps(dhb_index_and_disease_case_map,
+            max_cases = 0
+            for j in range(2, len(columns)):
+                if not (disease in disease_index_map):
+                    disease_index_map[disease] = { "values" : [], "max" : 0 }
+                num_cases = columns[j]
+                if num_cases > max_cases:
+                    max_cases = num_cases
+                array = disease_index_map[disease]["values"]
+                array.extend(num_cases)
+            disease_index_map[disease]["max"] = max_cases
+    return json.dumps(disease_index_map,
                       sort_keys=True,
                       indent=4, separators=(',', ': '))
 
@@ -42,9 +48,11 @@ if __name__ == "__main__":
         pass # Directory already exists
     for subdir, dirs, files in os.walk(ROOTDIR):
         for file in files:
-            print "Converting {0}...".format(file)
+            name_and_ext = os.path.splitext(file)
+            if name_and_ext[1] != ".csv":
+                continue
+            print("Converting {0}...".format(file))
             input_path = os.path.join(ROOTDIR, file)
-            file_without_ext = os.path.splitext(file)[0]
-            output_path = os.path.join(OUTPUTDIR, file_without_ext + ".json")
+            output_path = os.path.join(OUTPUTDIR, name_and_ext[0] + ".json")
             convert(input_path, output_path)
-    print "Done."
+    print("Done.")
