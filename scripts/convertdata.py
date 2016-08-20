@@ -4,7 +4,7 @@ import os
 import os.path
 
 ROOTDIR = "raw_data"
-OUTPUTDIR = "data_json"
+OUTPUTDIR = "public/data_json"
 
 def parse(path):
     disease_index_map = {}
