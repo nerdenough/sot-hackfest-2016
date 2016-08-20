@@ -6,6 +6,8 @@ var sliderConfig = {
 };
 
 function loadData (year) {
+  $('#slider-year').css({left: $('.ui-slider-handle').css('left')});
+  $('#slider-year').text(year);
   $.getJSON('/data_json/' + year + '_June.json', function (data) {
     $('#dropdown-list').html('');
     console.log(data);
