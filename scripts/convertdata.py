@@ -7,18 +7,20 @@ ROOTDIR = "raw_data"
 OUTPUTDIR = "data_json"
 
 def parse(path):
-    dhb_list = []
     disease_index_map = {}
     with open(path, "r") as file:
+        base_index = -1
+
         for idx, line in enumerate(file):
-            if idx == 0:
-                continue # skip first line
-            if idx == 1:
-                dhb_list.extend([l for l in line.strip().split(",") if l.strip() != ""])
-                continue
-            if idx % 2 != 0:
-                continue # skip rows corresponding to cases
             columns = line.strip().split(",")
+            if base_index == -1:
+                if "Northland" in columns:
+                    base_index = idx + 1
+                continue
+
+            if (idx - base_index) % 2 != 0:
+                continue # skip 'case' rows
+
             disease = columns[0]
             for j in xrange(2, len(columns)):
                 dhb_index = j - 1
