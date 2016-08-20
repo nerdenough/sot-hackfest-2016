@@ -22,7 +22,7 @@ def parse(path):
                 continue # skip 'case' rows
 
             disease = columns[0]
-            for j in xrange(2, len(columns)):
+            for j in range(2, len(columns)):
                 dhb_index = j - 1
                 if not (disease in disease_index_map):
                     disease_index_map[disease] = {}
@@ -47,8 +47,8 @@ if __name__ == "__main__":
             name_and_ext = os.path.splitext(file)
             if name_and_ext[1] != ".csv":
                 continue
-            print "Converting {0}...".format(file)
+            print("Converting {0}...".format(file))
             input_path = os.path.join(ROOTDIR, file)
             output_path = os.path.join(OUTPUTDIR, name_and_ext[0] + ".json")
             convert(input_path, output_path)
-    print "Done."
+    print("Done.")
