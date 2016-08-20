@@ -22,12 +22,16 @@ def parse(path):
                 continue # skip 'case' rows
 
             disease = columns[0]
+            max_cases = 0
             for j in range(2, len(columns)):
-                dhb_index = j - 1
                 if not (disease in disease_index_map):
-                    disease_index_map[disease] = {}
-                submap = disease_index_map[disease]
-                submap[dhb_index] = columns[j]
+                    disease_index_map[disease] = { "values" : [], "max" : 0 }
+                num_cases = columns[j]
+                if num_cases > max_cases:
+                    max_cases = num_cases
+                array = disease_index_map[disease]["values"]
+                array.extend(num_cases)
+            disease_index_map[disease]["max"] = max_cases
     return json.dumps(disease_index_map,
                       sort_keys=True,
                       indent=4, separators=(',', ': '))
