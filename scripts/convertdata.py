@@ -33,7 +33,10 @@ def parse(path):
             max_cases = 0
             disease_index_list.append({ "name" : disease, "values": [], "max" : 0})
             for j in range(2, len(columns)):
-                num_cases = columns[j]
+                try:
+                    num_cases = int(columns[j])
+                except ValueError:
+                    continue
                 if num_cases > max_cases:
                     max_cases = num_cases
                 array = disease_index_list[-1]["values"]
