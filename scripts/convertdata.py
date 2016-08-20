@@ -1,5 +1,10 @@
 import sys
 import json
+import os
+import os.path
+
+ROOTDIR = "raw_data"
+OUTPUTDIR = "data_json"
 
 def parse(path):
     dhb_list = []
@@ -21,8 +26,25 @@ def parse(path):
                     dhb_index_and_disease_case_map[dhb_index] = {}
                 submap = dhb_index_and_disease_case_map[dhb_index]
                 submap[disease] = columns[j]
-    print json.dumps(dhb_index_and_disease_case_map, sort_keys=True, indent=4, separators=(',', ': '))
+    return json.dumps(dhb_index_and_disease_case_map,
+                      sort_keys=True,
+                      indent=4, separators=(',', ': '))
+
+def convert(path, output_path):
+    with open(output_path, "w") as output_file:
+        code = parse(path)
+        output_file.write(code)
 
 if __name__ == "__main__":
-    path = sys.argv[1]
-    parse(path)
+    try:
+        os.mkdir(OUTPUTDIR)
+    except OSError:
+        pass # Directory already exists
+    for subdir, dirs, files in os.walk(ROOTDIR):
+        for file in files:
+            print "Converting {0}...".format(file)
+            input_path = os.path.join(ROOTDIR, file)
+            file_without_ext = os.path.splitext(file)[0]
+            output_path = os.path.join(OUTPUTDIR, file_without_ext + ".json")
+            convert(input_path, output_path)
+    print "Done."
