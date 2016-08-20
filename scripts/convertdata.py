@@ -21,6 +21,13 @@ def parse(path):
             if (idx - base_index) % 2 != 0:
                 continue # skip 'case' rows
 
+            count_of_empty = 0
+            for col in columns:
+                if col.strip() == "":
+                    count_of_empty += 1
+            if count_of_empty > 2:
+                break
+
             disease = columns[0]
             max_cases = 0
             disease_index_list.append({ "name" : disease, "values": [], "max" : 0})
