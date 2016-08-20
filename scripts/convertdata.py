@@ -42,9 +42,11 @@ if __name__ == "__main__":
         pass # Directory already exists
     for subdir, dirs, files in os.walk(ROOTDIR):
         for file in files:
+            name_and_ext = os.path.splitext(file)
+            if name_and_ext[1] != ".csv":
+                continue
             print "Converting {0}...".format(file)
             input_path = os.path.join(ROOTDIR, file)
-            file_without_ext = os.path.splitext(file)[0]
-            output_path = os.path.join(OUTPUTDIR, file_without_ext + ".json")
+            output_path = os.path.join(OUTPUTDIR, name_and_ext[0] + ".json")
             convert(input_path, output_path)
     print "Done."
