@@ -8,7 +8,12 @@ var sliderConfig = {
 function loadData (year) {
   $.getJSON('/data_json/' + year + '_June.json', function (data) {
     console.log(data);
+    for(var i = 0; i < data.length; i++){
+      var item = data[i];
+      $("#dropdown-list").append("<li onclick='updateMap("+i+")'><a>" + item.name +"</a></li>");
+    }
   });
+
 }
 
 function updateMap (event, ui) {
