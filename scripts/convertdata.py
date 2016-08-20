@@ -7,7 +7,7 @@ ROOTDIR = "raw_data"
 OUTPUTDIR = "public/data_json"
 
 def parse(path):
-    disease_index_map = {}
+    disease_index_list = []
     with open(path, "r") as file:
         base_index = -1
 
@@ -21,18 +21,24 @@ def parse(path):
             if (idx - base_index) % 2 != 0:
                 continue # skip 'case' rows
 
+            count_of_empty = 0
+            for col in columns:
+                if col.strip() == "":
+                    count_of_empty += 1
+            if count_of_empty > 2:
+                break
+
             disease = columns[0]
             max_cases = 0
+            disease_index_list.append({ "name" : disease, "values": [], "max" : 0})
             for j in range(2, len(columns)):
-                if not (disease in disease_index_map):
-                    disease_index_map[disease] = { "values" : [], "max" : 0 }
                 num_cases = columns[j]
                 if num_cases > max_cases:
                     max_cases = num_cases
-                array = disease_index_map[disease]["values"]
+                array = disease_index_list[-1]["values"]
                 array.append(num_cases)
-            disease_index_map[disease]["max"] = max_cases
-    return json.dumps(disease_index_map,
+            disease_index_list[-1]["max"] = max_cases
+    return json.dumps(disease_index_list,
                       sort_keys=True,
                       indent=4, separators=(',', ': '))
 
