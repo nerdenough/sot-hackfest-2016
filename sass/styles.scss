@@ -31,7 +31,7 @@ body {
 
 #dropdown {
   position: absolute;
-  top: 5%;
+  top: 82px;
   left: 50%;
   width: 70%;
   transform: translate(-50%, 0%);
@@ -53,6 +53,14 @@ body {
   background: white;
   border-radius: 0;
   border: none;
+  height: 100px;
+
+  .navbar-brand {
+    font-size: 32px;
+    color: #202020;
+    line-height: 100px;
+    padding-top: 0;
+  }
 }
 
 .ui-slider-handle {
