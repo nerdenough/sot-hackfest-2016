@@ -7,6 +7,7 @@ var sliderConfig = {
 
 function loadData (year) {
   $.getJSON('/data_json/' + year + '_June.json', function (data) {
+    $('#dropdown-list').html('');
     console.log(data);
     for(var i = 0; i < data.length; i++){
       var item = data[i];
