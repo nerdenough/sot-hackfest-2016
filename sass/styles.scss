@@ -1,8 +1,11 @@
-body {
-  margin: 0;
+#map-container {
+  width: 100%;
+  height: 400px;
+  background: #efefef;
 }
 
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
+#slider-container {
+  width: 100%;
+  height: 80px;
+  background: #cecece;
 }
