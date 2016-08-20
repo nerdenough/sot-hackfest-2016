@@ -1,35 +1,40 @@
 #map-container {
   width: 100%;
   height: 400px;
-  background: #efefef;
 }
 
 #slider-container {
   position: relative;
   width: 100%;
   height: 80px;
-  background: #cecece;
 }
 
 #slider {
   width: 90%;
-  height: 4px;
+  height: 6px;
   position: absolute;
   top: 50%;
   left: 50%;
+  background: #fea64f;
   transform: translate(-50%, -50%);
+  outline: none;
+  border: none;
 }
 
 .navbar {
   margin-bottom: 0;
+  border-radius: none;
+  border: none;
 }
 
 .ui-slider-handle {
-  width: 40px!important;
+  width: 50px!important;
   height: 24px!important;
+  background: white!important;
   top: 50%!important;
   transform: translate(-50%, -50%);
   text-align: center;
+  border: 1px solid #efefef;
 }
 
 @media (max-width: 1024px) {

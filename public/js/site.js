@@ -3,7 +3,6 @@ var sliderConfig = {
 };
 
 function updateMap (event, ui) {
-  $('.ui-slider-handle').text(ui.value);
   var value = ui.value;
   console.log(value);
 }
