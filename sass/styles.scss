@@ -18,3 +18,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.ui-slider-handle {
+  width: 60px!important;
+  height: 24px!important;
+  top: 50%!important;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 1024px) {
+}
