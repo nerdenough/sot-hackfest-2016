@@ -21,6 +21,26 @@
   border: none;
 }
 
+#dropdown {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: 500px;
+  transform: translate(-50%, 0%);
+  z-index: 999;
+  #dropdown-button{
+    width: 100%;
+    background: #fea64f!important;
+    border-color: #fea64f;
+  }
+}
+
+#dropdown-list {
+  width: 100%;
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
 .navbar {
   margin-bottom: 0;
   border-radius: none;
