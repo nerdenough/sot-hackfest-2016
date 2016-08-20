@@ -1,7 +1,6 @@
 {
-  "name": "summer-of-tech-js-masterclass",
+  "name": "Outbreak",
   "version": "0.0.1",
-  "main": "index.js",
   "description": "",
   "scripts": {
     "start": "node ./bin/www"
