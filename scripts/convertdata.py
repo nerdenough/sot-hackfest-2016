@@ -9,24 +9,25 @@ OUTPUTDIR = "public/data_json"
 def parse(path):
     disease_index_list = []
     with open(path, "r") as file:
-        base_index = -1
+        alternation_index = -1
 
         for idx, line in enumerate(file):
             columns = line.strip().split(",")
-            if base_index == -1:
+            if alternation_index == -1:
                 if "Northland" in columns:
-                    base_index = idx + 1
+                    alternation_index = 0
                 continue
-
-            if (idx - base_index) % 2 != 0:
-                continue # skip 'case' rows
 
             count_of_empty = 0
             for col in columns:
                 if col.strip() == "":
                     count_of_empty += 1
-            if count_of_empty > 2:
-                break
+            if (float(count_of_empty) / len(columns)) > 0.75:
+                continue
+
+            alternation_index += 1
+            if alternation_index % 2 == 0:
+                continue # skip 'case' rows
 
             disease = columns[0]
             max_cases = 0
