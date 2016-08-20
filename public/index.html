@@ -22,95 +22,61 @@
     </nav>
 
     <div class="container">
-		<div id="map-container">
-			<div id="map" style="width: 100%; height: 400px"></div>
-	    </div>
+      <div id="map-container">
+        <div id="map" style="width: 100%; height: 400px"></div>
+      </div>
 
       <div id="slider-container">
-        <!-- TODO -->
         <div id="slider"></div>
       </div>
     </div>
 
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Disease Select
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Campylobacteriosis</a></li>
+          <li><a href="#">Cryptosporidiosis</a></li>
+          <li><a href="#">Dengue fever</a></li>
+          <li><a href="#">Gastroenteritis</a></li>
+          <li><a href="#">Giardiasis</a></li>
+          <li><a href="#">Haemophilus influenzae type b</a></li>
+          <li><a href="#">Hepatitis A</a></li>
+          <li><a href="#">Hepatitis B</a></li>
+          <li><a href="#">Hepatitis C</a></li>
+          <li><a href="#">Invasive pneumococcal disease</a></li>
+          <li><a href="#">Legionellosis</a></li>
+          <li><a href="#">Leptospirosis</a></li>
+          <li><a href="#">Listeriosis</a></li>
+          <li><a href="#">Malaria</a></li>
+          <li><a href="#">Measles</a></li>
+          <li><a href="#">Meningococcal disease</a></li>
+          <li><a href="#">Mumps</a></li>
+          <li><a href="#">Paratyphoid fever</a></li>
+          <li><a href="#">Pertussis</a></li>
+          <li><a href="#">Q fever</a></li>
+          <li><a href="#">Rheumatic fever</a></li>
+          <li><a href="#">Rickettsial disease</a></li>
+          <li><a href="#">Rubella</a></li>
+          <li><a href="#">Salmonellosis</a></li>
+          <li><a href="#">Shigellosis</a></li>
+          <li><a href="#">Tuberculosis disease</a></li>
+          <li><a href="#">Typhoid fever</a></li>
+          <li><a href="#">VTEC/STEC infection</a></li>
+          <li><a href="#">Viral Haemorrhagic Fever</a></li>
+          <li><a href="#">Yersiniosis</a></li>
+        </ul>
+    </div>
+
+
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/site.js"></script>
 
-	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-	<script>
-		var map = L.map('map').setView(new L.LatLng(-41, 174), 5);
+    <script src="/js/map.js"></script>
 
-		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
-			maxZoom: 18,
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-			id: 'mapbox.light'
-		}).addTo(map);
-
-		 $.getJSON("/map/NZDHB.json", function(data){ geojson = L.geoJson(data,{
-                style: style,
-                onEachFeature: onEachFeature} ).addTo(map);
-      });
-
-
-/*********
-FUNCTIONS
-*********/
-
-  
-//Style of map
-  function style() {
-      return {
-         
-          fillColor: '#fff',
-          weight: 1,
-          opacity: 1,
-          color: '#bdbdbd',
-          dashArray: '3',
-          fillOpacity: 0.7
-      };
-  }
-
-//Style when mouse hovers
-  function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 2,
-        color: '#fea606',
-        dashArray: '',
-        fillOpacity: 1.0,
-        fillColor:'#fea606'
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }
-}
- //Reset styles when mouse out
-function resetHighlight(e) {
-
-    geojson.resetStyle(e.target);
-}
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-}
-
-
-    
-	</script>
   </body>
 </html>
