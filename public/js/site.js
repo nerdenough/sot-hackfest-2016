@@ -1,12 +1,15 @@
 var sliderConfig = {
   change: updateMap,
-  min: 2011,
+  min: 2002,
   max: 2016,
   value: 2016
 };
 
 function loadData (year) {
-  $('#slider-year').css({left: $('.ui-slider-handle').css('left')});
+  var sliderHandle = $('.ui-slider-handle');
+  var left = parseInt(sliderHandle.css('left').replace('px', ''));
+  var paddingLeft = parseInt(sliderHandle.css('padding-left').replace('px', ''));
+  $('#slider-year').css({left: left + paddingLeft + 'px'});
   $('#slider-year').text(year);
   $.getJSON('/data_json/' + year + '_June.json', function (data) {
     $('#dropdown-list').html('');
