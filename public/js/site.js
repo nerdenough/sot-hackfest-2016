@@ -17,15 +17,16 @@ function loadData (year) {
     for(var i = 0; i < data.length; i++){
       var item = data[i];
       $('#dropdown-list')
-        .append('<li onclick="changeDisease(' + i + ')"><a>' + item.name + '</a></li>');
+        .append('<li onclick="changeDisease(' + i + ', \'' + item.name + '\')"><a>' + item.name + '</a></li>');
     }
+    $('#dropdown-button-text').text(data[0].name);
   });
-
 }
 
-function changeDisease(index) {
-  console.log(index);
+function changeDisease(index, name) {
+  console.log(name);
   mapControl.setDiseaseIndex(index);
+  $('#dropdown-button-text').text(name);
 }
 
 function updateMap (event, ui) {
