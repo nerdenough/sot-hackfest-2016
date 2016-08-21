@@ -48,10 +48,7 @@ mapControl = function() {
 
   L.tileLayer('https://api.mapbox.com/styles/v1/hemolyticus/cis3tdb0q000bgrnn2fj8p0mo/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVtb2x5dGljdXMiLCJhIjoiY2lzMmt5OHJ6MDE1eTJ6bGt3cTZuemR3aCJ9.AYvhTvGttKuosFQnoN3Ptw', {
     maxZoom: 18,
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
-      + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, '
-      + 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      id: 'mapbox.light'
+    attribution: ''
   }).addTo(map);
 
 
