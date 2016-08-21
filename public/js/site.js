@@ -6,6 +6,7 @@ var sliderConfig = {
 };
 
 function loadData (year) {
+  $('#highlight-info').hide();
   var sliderHandle = $('.ui-slider-handle');
   var left = parseInt(sliderHandle.css('left').replace('px', ''));
   $('#slider-year').css({left: (left - 33) + 'px'});
