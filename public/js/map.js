@@ -21,6 +21,10 @@ var DHB_NAMES = [
   "Southern"
 ];
 
+var DISEASE_COLORS = [
+  [0xff, 0xf1, 0x00]
+];
+
 mapControl = function() {
   var map = L.map('map').setView(new L.LatLng(-41, 174), 5);
 
@@ -35,6 +39,19 @@ mapControl = function() {
   var baseColorR = 255;
   var baseColorG = 255;
   var baseColorB = 255;
+
+  function updateColors() {
+    if (currDiseaseIndex < DISEASE_COLORS.length) {
+      baseColorR = DISEASE_COLORS[currDiseaseIndex][0];
+      baseColorG = DISEASE_COLORS[currDiseaseIndex][1];
+      baseColorB = DISEASE_COLORS[currDiseaseIndex][2];
+    } else {
+      baseColorR = 255;
+      baseColorG = 255;
+      baseColorB = 255;
+    }
+  }
+  updateColors();
 
   function loadDataJSON(onFinish) {
     $.getJSON('/data_json/' + currYear + '_June.json', function (diseaseJSON) {
@@ -150,6 +167,7 @@ mapControl = function() {
     createMap : createMap,
     setDiseaseIndex : function(index) {
       currDiseaseIndex = index;
+      updateColors();
       loadDataJSON(updateMap);
     },
     setYear : function(y) {
