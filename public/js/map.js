@@ -1,27 +1,36 @@
-var map = L.map('map').setView(new L.LatLng(-41, 174), 5);
+mapControl = function() {
+  var map = L.map('map').setView(new L.LatLng(-41, 174), 5);
 
-L.tileLayer('https://api.mapbox.com/styles/v1/hemolyticus/cis3tdb0q000bgrnn2fj8p0mo/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVtb2x5dGljdXMiLCJhIjoiY2lzMmt5OHJ6MDE1eTJ6bGt3cTZuemR3aCJ9.AYvhTvGttKuosFQnoN3Ptw', {
-  maxZoom: 18,
-  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
-  	+ '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, '
-    + 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    id: 'mapbox.light'
-}).addTo(map);
+  var currYear = 2016;
+  var currDiseaseIndex = 0;
 
-function createMap(diseaseIndex, year) {
+  var maxCases = 0;
+  var dhbIDToNumCasesMap = null;
+
+  var featuresAndLayers = [];
+
   var baseColorR = 255;
   var baseColorG = 255;
   var baseColorB = 255;
 
-  $.getJSON('/data_json/' + year + '_June.json', function (diseaseJSON) {
-
-    var maxCases = diseaseJSON[diseaseIndex].max;
-    var dhbIDToNumCasesMap = diseaseJSON[diseaseIndex].values;
-
-    $.getJSON("/map/NZDHB.json", function(data){ geojson = L.geoJson(data,{
-      style: style,
-      onEachFeature: onEachFeature} ).addTo(map);
+  function loadDataJSON(onFinish) {
+    $.getJSON('/data_json/' + currYear + '_June.json', function (diseaseJSON) {
+      maxCases = diseaseJSON[currDiseaseIndex].max;
+      dhbIDToNumCasesMap = diseaseJSON[currDiseaseIndex].values;
+      onFinish();
     });
+  }
+
+  loadDataJSON(createMap);
+
+  L.tileLayer('https://api.mapbox.com/styles/v1/hemolyticus/cis3tdb0q000bgrnn2fj8p0mo/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVtb2x5dGljdXMiLCJhIjoiY2lzMmt5OHJ6MDE1eTJ6bGt3cTZuemR3aCJ9.AYvhTvGttKuosFQnoN3Ptw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
+      + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, '
+      + 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      id: 'mapbox.light'
+  }).addTo(map);
+
 
     /*********
     FUNCTIONS
@@ -69,33 +78,57 @@ function createMap(diseaseIndex, year) {
     }
 
     //Style when mouse hovers
-      function highlightFeature(e, feature) {
+    function highlightFeature(e, feature) {
 
-        setupStyle(feature, e.target, true);
+      setupStyle(feature, e.target, true);
 
-        if (!L.Browser.ie && !L.Browser.opera) {
-            e.target.bringToFront();
-        }
+      if (!L.Browser.ie && !L.Browser.opera) {
+          e.target.bringToFront();
+      }
     }
      //Reset styles when mouse out
     function resetHighlight(e, feature) {
-        setupStyle(feature, e.target, false);
+      setupStyle(feature, e.target, false);
     }
 
     function zoomToFeature(e) {
-        map.fitBounds(e, e.target.getBounds());
+      map.fitBounds(e, e.target.getBounds());
     }
-
 
     function onEachFeature(feature, layer) {
-        setupStyle(feature, layer, false);
-        layer.on({
-            mouseover: function(e) { highlightFeature(e, feature) },
-            mouseout: function(e) { resetHighlight(e, feature) },
-            click: zoomToFeature
-        });
+      featuresAndLayers.push([feature, layer]);
+      setupStyle(feature, layer, false);
+      layer.on({
+          mouseover: function(e) { highlightFeature(e, feature) },
+          mouseout: function(e) { resetHighlight(e, feature) },
+          click: zoomToFeature
+      });
     }
-  });
-}
 
-createMap(0, 2016);
+  function createMap() {
+    $.getJSON("/map/NZDHB.json", function(data){ geojson = L.geoJson(data,{
+      style: style,
+      onEachFeature: onEachFeature} ).addTo(map);
+    });
+  }
+
+  function updateMap() {
+    for (var i = 0; i < featuresAndLayers.length; ++i) {
+      var feature = featuresAndLayers[i][0];
+      var layer = featuresAndLayers[i][1];
+      setupStyle(feature, layer, false);
+    }
+  }
+
+  return {
+    createMap : createMap,
+    setDiseaseIndex : function(index) {
+      currDiseaseIndex = index;
+      loadDataJSON(updateMap);
+    },
+    setYear : function(y) {
+      currYear = y;
+      loadDataJSON(updateMap);
+    }
+  };
+}();

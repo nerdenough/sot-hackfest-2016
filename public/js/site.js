@@ -28,7 +28,9 @@ function changeDisease(index) {
 }
 
 function updateMap (event, ui) {
-  loadData(ui.value);
+  var year = ui.value;
+  loadData(year);
+  mapControl.setYear(year);
 }
 
 $('#slider').slider(sliderConfig);
