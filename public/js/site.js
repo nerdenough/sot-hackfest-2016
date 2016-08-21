@@ -23,8 +23,8 @@ function loadData (year) {
 }
 
 function changeDisease(index) {
-  // TODO
   console.log(index);
+  mapControl.setDiseaseIndex(index);
 }
 
 function updateMap (event, ui) {
