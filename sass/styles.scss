@@ -47,6 +47,46 @@ body {
   color: #000000;
 }
 
+#legend {
+  position: absolute;
+  width: 110px;
+  height: 100px;
+  right: 100px;
+  bottom: 190px;
+  z-index: 999;
+  color: white;
+}
+
+#legend #gradient-container {
+  width: 50%;
+  height: 100%;
+  float: left;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+#legend #solid-black {
+  height: 25%;
+  background-color: black;
+}
+
+#legend #gradient-container #gradient {
+  height: 75%;
+  background: linear-gradient(black, white);
+}
+
+#legend #labels #most-cases {
+  position: absolute;
+  left: 60px;
+  top: 28px;
+}
+#legend #labels #least-cases {
+  position: absolute;
+  left: 60px;
+  bottom: -38px;
+}
+
 #dropdown {
   position: absolute;
   top: 82px;
