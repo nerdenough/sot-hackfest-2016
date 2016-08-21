@@ -27,7 +27,7 @@ mapControl = function() {
   var currYear = 2016;
   var currDiseaseIndex = 0;
 
-  var maxCases = 0;
+  var maxCases = 110;
   var dhbIDToNumCasesMap = null;
 
   var featuresAndLayers = [];
@@ -38,7 +38,6 @@ mapControl = function() {
 
   function loadDataJSON(onFinish) {
     $.getJSON('/data_json/' + currYear + '_June.json', function (diseaseJSON) {
-      maxCases = diseaseJSON[currDiseaseIndex].max;
       dhbIDToNumCasesMap = diseaseJSON[currDiseaseIndex].values;
       onFinish();
     });
@@ -93,7 +92,7 @@ mapControl = function() {
           weight: 1,
           opacity: 1,
           dashArray: '3',
-          fillOpacity: 0.7
+          fillOpacity: 1
         });
       }
     }
