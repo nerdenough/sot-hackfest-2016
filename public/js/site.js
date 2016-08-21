@@ -16,10 +16,16 @@ function loadData (year) {
     console.log(data);
     for(var i = 0; i < data.length; i++){
       var item = data[i];
-      $("#dropdown-list").append("<li onclick='updateMap("+i+")'><a>" + item.name +"</a></li>");
+      $('#dropdown-list')
+        .append('<li onclick="changeDisease(' + i + ')"><a>' + item.name + '</a></li>');
     }
   });
 
+}
+
+function changeDisease(index) {
+  // TODO
+  console.log(index);
 }
 
 function updateMap (event, ui) {
