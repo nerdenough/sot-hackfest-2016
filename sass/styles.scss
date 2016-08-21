@@ -30,6 +30,22 @@ body {
   border-radius: 0;
 }
 
+#highlight-info {
+  background: #808080;
+  position: absolute;
+  background: white;
+  width: 50px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 3px;
+  border-bottom-left-radius: 0;
+  margin-left: 3px;
+}
+#info {
+  color: #000000;
+}
+
 #dropdown {
   position: absolute;
   top: 82px;
@@ -48,6 +64,14 @@ body {
   width: 100%;
   max-height: 150px;
   overflow-y: scroll;
+  background-color: #fea64f;
+  a {
+    color:#ffffff;
+  }
+  a:hover {
+    background-color: #ed953e;
+  }
+
 }
 
 .navbar {

@@ -44,6 +44,7 @@ mapControl = function() {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
 
+
     //Style of map
       function style() {
           return {
@@ -79,15 +80,20 @@ mapControl = function() {
 
     //Style when mouse hovers
     function highlightFeature(e, feature) {
-
+      setupStyle(feature, e.target, true);
+      console.log(feature.id);
+      // $('#highlight-info').append("<p>" + dhbIDToNumCasesMap[feature.id] + "</p>");
+      $('#info').html("<p>" + dhbIDToNumCasesMap[feature.id-1] + "</p>");
       setupStyle(feature, e.target, true);
 
       if (!L.Browser.ie && !L.Browser.opera) {
           e.target.bringToFront();
       }
     }
+
      //Reset styles when mouse out
     function resetHighlight(e, feature) {
+      $('#info').html("");
       setupStyle(feature, e.target, false);
     }
 
