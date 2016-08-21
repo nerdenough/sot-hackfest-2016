@@ -28,7 +28,7 @@ function createMap(diseaseIndex, year) {
     *********/
 
     function computeColor(dhbID) {
-      var fraction = dhbIDToNumCasesMap[dhbID-1] / maxCases;
+      var fraction = 1 - (dhbIDToNumCasesMap[dhbID-1] / maxCases);
       var r = Math.round(fraction * baseColorR);
       var g = Math.round(fraction * baseColorG);
       var b = Math.round(fraction * baseColorB);
