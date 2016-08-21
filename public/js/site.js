@@ -8,8 +8,7 @@ var sliderConfig = {
 function loadData (year) {
   var sliderHandle = $('.ui-slider-handle');
   var left = parseInt(sliderHandle.css('left').replace('px', ''));
-  var paddingLeft = parseInt(sliderHandle.css('padding-left').replace('px', ''));
-  $('#slider-year').css({left: left + paddingLeft + 'px'});
+  $('#slider-year').css({left: (left - 33) + 'px'});
   $('#slider-year').text(year);
   $.getJSON('/data_json/' + year + '_June.json', function (data) {
     $('#dropdown-list').html('');

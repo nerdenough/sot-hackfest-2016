@@ -18,7 +18,7 @@ body {
 }
 
 #slider {
-  width: 90%;
+  width: 70%;
   height: 6px;
   position: absolute;
   top: 50%;
@@ -78,6 +78,7 @@ body {
 #slider-year {
   background: #808080;
   position: absolute;
+  top: -38px;
   background: white;
   width: 50px;
   height: 24px;
@@ -85,7 +86,6 @@ body {
   line-height: 24px;
   border-radius: 3px;
   border-bottom-left-radius: 0;
-  margin-left: 3px;
 }
 
 @media (max-width: 1024px) {
