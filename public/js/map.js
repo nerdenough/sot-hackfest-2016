@@ -75,6 +75,7 @@ function createMap(diseaseIndex, year) {
         console.log(feature.id);
         // $('#highlight-info').append("<p>" + dhbIDToNumCasesMap[feature.id] + "</p>");
         $('#info').html("<p>" + dhbIDToNumCasesMap[feature.id] + "</p>");
+        $('#highlight-info').show();//css({"z-index": 999});
         setupStyle(feature, e.target, true);
 
         if (!L.Browser.ie && !L.Browser.opera) {
@@ -85,6 +86,7 @@ function createMap(diseaseIndex, year) {
     function resetHighlight(e, feature) {
       // $('#highlight-info').remove();
       $('#info').html("");
+      $('#highlight-info').hide();//.css({"z-index": -1});
         setupStyle(feature, e.target, false);
     }
 
