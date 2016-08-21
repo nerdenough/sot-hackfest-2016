@@ -19,7 +19,6 @@ function loadData (year) {
       $('#dropdown-list')
         .append('<li onclick="changeDisease(' + i + ', \'' + item.name + '\')"><a>' + item.name + '</a></li>');
     }
-    $('#dropdown-button-text').text('Select Disease');
   });
 }
 
