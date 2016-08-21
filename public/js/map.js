@@ -74,7 +74,7 @@ function createMap(diseaseIndex, year) {
         /*TODO draw something*/
         console.log(feature.id);
         // $('#highlight-info').append("<p>" + dhbIDToNumCasesMap[feature.id] + "</p>");
-        $('#info').html("<p>" + dhbIDToNumCasesMap[feature.id] + "</p>");
+        $('#info').html("<p>" + dhbIDToNumCasesMap[feature.id-1] + "</p>");
         setupStyle(feature, e.target, true);
 
         if (!L.Browser.ie && !L.Browser.opera) {
