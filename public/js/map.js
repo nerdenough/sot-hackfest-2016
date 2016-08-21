@@ -35,6 +35,7 @@ function createMap(diseaseIndex, year) {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
 
+
     //Style of map
       function style() {
           return {
@@ -70,7 +71,10 @@ function createMap(diseaseIndex, year) {
 
     //Style when mouse hovers
       function highlightFeature(e, feature) {
-
+        /*TODO draw something*/
+        console.log(feature.id);
+        // $('#highlight-info').append("<p>" + dhbIDToNumCasesMap[feature.id] + "</p>");
+        $('#info').html("<p>" + dhbIDToNumCasesMap[feature.id] + "</p>");
         setupStyle(feature, e.target, true);
 
         if (!L.Browser.ie && !L.Browser.opera) {
@@ -79,6 +83,8 @@ function createMap(diseaseIndex, year) {
     }
      //Reset styles when mouse out
     function resetHighlight(e, feature) {
+      // $('#highlight-info').remove();
+      $('#info').html("");
         setupStyle(feature, e.target, false);
     }
 
