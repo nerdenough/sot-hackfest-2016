@@ -1,6 +1,6 @@
 var sliderConfig = {
   change: updateMap,
-  min: 2002,
+  min: 2007,
   max: 2016,
   value: 2016
 };
@@ -36,3 +36,13 @@ function updateMap (event, ui) {
 
 $('#slider').slider(sliderConfig);
 loadData(2016);
+
+document.onmousemove = function (e) {
+  var x = e.clientX;
+  var y = e.clientY;
+
+  $('#highlight-info').css({
+    left: x,
+    top: y
+  });
+}

@@ -3,6 +3,7 @@ $orange: #fea64f;
 
 body {
   background: $blue;
+  font-family: Arimo, sans-serif!important;
 }
 
 #map-container {
@@ -39,8 +40,8 @@ body {
   text-align: center;
   line-height: 24px;
   border-radius: 3px;
-  border-bottom-left-radius: 0;
   margin-left: 3px;
+  z-index: 999;
 }
 #info {
   color: #000000;
@@ -109,7 +110,6 @@ body {
   text-align: center;
   line-height: 24px;
   border-radius: 3px;
-  border-bottom-left-radius: 0;
 }
 
 @media (max-width: 1024px) {
