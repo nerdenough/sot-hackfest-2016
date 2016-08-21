@@ -1,3 +1,26 @@
+var DHB_NAMES = [
+  "Northland",
+  "Waitemata",
+  "Auckland",
+  "Counties Manukau",
+  "Waikato",
+  "Lakes",
+  "Bay of Plenty",
+  "Tairawhiti",
+  "Taranaki",
+  "Hawke's Bay",
+  "Whanganui",
+  "MidCentral",
+  "Hutt Valley",
+  "Capital and Coast",
+  "Wairarapa",
+  "Nelson Marlborough",
+  "West Coast",
+  "Canterbury",
+  "South Canterbury",
+  "Southern"
+];
+
 mapControl = function() {
   var map = L.map('map').setView(new L.LatLng(-41, 174), 5);
 
@@ -82,10 +105,9 @@ mapControl = function() {
     function highlightFeature(e, feature) {
       setupStyle(feature, e.target, true);
       console.log(feature.id);
-      $('#highlight-info').show();
-      $('#info').html("<p>" + dhbIDToNumCasesMap[feature.id-1] + "</p>");
 
-      setupStyle(feature, e.target, true);
+      $('#highlight-info').show();
+      $('#info').html("<p>" + DHB_NAMES[feature.id-1] + ": " + dhbIDToNumCasesMap[feature.id-1] + "</p>");
 
       if (!L.Browser.ie && !L.Browser.opera) {
           e.target.bringToFront();
